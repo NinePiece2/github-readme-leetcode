@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "11:00"
+      timezone: "America/Toronto"
+    commit-message:
+      prefix: "deps(npm)"
+    groups:
+      ui-dependencies:
+        patterns:
+          - "*"
+    reviewers:
+      - "ninepiece2"

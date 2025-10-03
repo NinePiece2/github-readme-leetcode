@@ -222,7 +222,7 @@ export default function Home() {
                   Basic Usage
                 </h3>
                 <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-                  <code className="break-words">{`![LeetCode Stats](https://cloudflare_URL/username)`}</code>
+                  <code className="break-words">{`![LeetCode Stats](https://github-readme-leetcode-card.romitsagu.com/username)`}</code>
                 </div>
               </div>
 
@@ -231,7 +231,7 @@ export default function Home() {
                   With Theme
                 </h3>
                 <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-                  <code className="break-words">{`![LeetCode Stats](https://cloudflare_URL/username?theme=dark)`}</code>
+                  <code className="break-words">{`![LeetCode Stats](https://github-readme-leetcode-card.romitsagu.com/username?theme=dark)`}</code>
                 </div>
               </div>
 
@@ -240,7 +240,7 @@ export default function Home() {
                   With Additional Data
                 </h3>
                 <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-                  <code className="break-words">{`![LeetCode Stats](https://cloudflare_URL/username?theme=radical&show=graph,recent)`}</code>
+                  <code className="break-words">{`![LeetCode Stats](https://github-readme-leetcode-card.romitsagu.com/username?theme=radical&show=graph,recent)`}</code>
                 </div>
               </div>
             </div>
