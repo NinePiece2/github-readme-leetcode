@@ -52,7 +52,7 @@ Notes
 - The project uses a small file-backed cache at `.cache/leetcode-cache.json` for local dev. Delete it if you change API parsing logic.
 # LeetCode Stats Card 📊
 
-Beautiful SVG cards for your GitHub README showing off your LeetCode progress. Inspired by [github-readme-stats](https://github.com/anuraghazra/github-readme-stats) and [LeetCode-Stats-Card](https://github.com/JacobLinCool/LeetCode-Stats-Card).
+SVG cards for your GitHub README showing off your LeetCode progress. Inspired by [github-readme-stats](https://github.com/anuraghazra/github-readme-stats) and [LeetCode-Stats-Card](https://github.com/JacobLinCool/LeetCode-Stats-Card).
 
 ## Quick Start
 
@@ -114,8 +114,8 @@ We support all the themes from github-readme-stats. Some popular ones:
 
 1. Fork this repo
 2. Deploy to Clouflare Worker (it's free!)
-   1. Set Build Command to ``
-   2. Set Deploy Command to ``
+   1. Set Build Command to `npx opennextjs-cloudflare build`
+   2. Set Deploy Command to `npx wrangler deploy`
 3. Use your deployment URL
 
 ## Development
