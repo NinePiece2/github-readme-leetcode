@@ -11,7 +11,7 @@
   "homepage": "https://github.com/NinePiece2/github-readme-leetocde",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
