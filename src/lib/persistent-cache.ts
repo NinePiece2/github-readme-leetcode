@@ -1,26 +1,46 @@
-import fs from 'fs/promises';
-import path from 'path';
-
 type CacheRecord<T> = { value: T; expiresAt: number };
 
-const CACHE_DIR = path.join(process.cwd(), '.cache');
-const CACHE_FILE = path.join(CACHE_DIR, 'leetcode-cache.json');
-
+// The cache attempts to use a file-backed store when running in Node.js. On edge
+// runtimes (Cloudflare Workers, Vercel Edge, etc.) the filesystem isn't available.
+// To avoid throwing at module-import time, we dynamically import fs/path and fall
+// back to an in-memory-only cache when those modules are unavailable.
 let inMemory: Record<string, CacheRecord<unknown>> | null = null;
+let fileBackingEnabled = true;
+let CACHE_DIR = '';
+let CACHE_FILE = '';
 
 async function ensureLoaded() {
   if (inMemory) return;
+
+  // Try to dynamically load fs/path. If unavailable, fall back to memory-only cache.
   try {
-    await fs.mkdir(CACHE_DIR, { recursive: true });
-    const raw = await fs.readFile(CACHE_FILE, 'utf8').catch(() => '{}');
-    inMemory = JSON.parse(raw || '{}');
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    CACHE_DIR = path.join(process.cwd(), '.cache');
+    CACHE_FILE = path.join(CACHE_DIR, 'leetcode-cache.json');
+
+    try {
+      await fs.mkdir(CACHE_DIR, { recursive: true });
+      const raw = await fs.readFile(CACHE_FILE, 'utf8').catch(() => '{}');
+      inMemory = JSON.parse(raw || '{}');
+    } catch {
+      // If reading/writing fails for any reason, fall back to memory-only but keep fileBackingEnabled=false
+      inMemory = {};
+      fileBackingEnabled = false;
+    }
   } catch {
+    // Dynamic import failed (likely running on an edge runtime) — use memory-only cache
     inMemory = {};
+    fileBackingEnabled = false;
   }
 }
 
 async function persist() {
   if (!inMemory) return;
+  if (!fileBackingEnabled) return; // skip on edge runtimes
+
+  // we know dynamic import succeeded previously; import fs here
+  const fs = await import('fs/promises');
   const tmp = CACHE_FILE + '.tmp';
   await fs.writeFile(tmp, JSON.stringify(inMemory), 'utf8');
   await fs.rename(tmp, CACHE_FILE);
@@ -32,7 +52,7 @@ export async function getCache<T>(key: string): Promise<CacheRecord<T> | null> {
   if (!rec) return null;
   if (rec.expiresAt <= Date.now()) {
     // expired
-  if (inMemory) delete inMemory[key];
+    if (inMemory) delete inMemory[key];
     await persist();
     return null;
   }

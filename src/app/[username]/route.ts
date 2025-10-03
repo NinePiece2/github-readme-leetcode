@@ -10,7 +10,8 @@ const LEETCODE_CACHE_TTL = parseInt(process.env.LEETCODE_CACHE_TTL || '900', 10)
 
 export async function GET(request: Request, { params }: { params: Promise<{ username: string }> }) {
   try {
-    const { username } = await params;
+  let { username } = await params;
+  username = String(username || '').trim();
     const url = new URL(request.url);
     
     const theme = url.searchParams.get('theme') || 'default';
@@ -25,14 +26,9 @@ export async function GET(request: Request, { params }: { params: Promise<{ user
     const showRecent = show.includes('recent');
     
     // Validate username
-    if (!username || username.trim() === '') {
-      return new NextResponse(
-        createErrorResponse(new Error('Username is required'), theme).svg,
-        {
-          headers: createErrorResponse(new Error('Username is required'), theme).headers,
-          status: 400
-        }
-      );
+    if (!username || username === '') {
+      const errResp = createErrorResponse(new Error('Username is required'), theme);
+      return new NextResponse(errResp.svg, { headers: errResp.headers, status: 400 });
     }
 
     const cacheKey = `${username}|g:${showGraph ? 1 : 0}|r:${showRecent ? 1 : 0}`;
@@ -42,8 +38,20 @@ export async function GET(request: Request, { params }: { params: Promise<{ user
 
     const cached = await persistentCache.getCache<LeetCodeStats>(cacheKey);
     if (cached && cached.expiresAt > now) {
-      stats = cached.value as LeetCodeStats;
-      cacheHit = true;
+      // validate cached payload matches requested username to avoid serving the wrong user's
+      // cached card (can happen if cache was populated incorrectly).
+      const cachedUsername = (cached.value as LeetCodeStats)?.username;
+      if (String(cachedUsername || '').trim().toLowerCase() === username.toLowerCase()) {
+        stats = cached.value as LeetCodeStats;
+        cacheHit = true;
+      } else {
+        // mismatch: drop the stale entry and fetch fresh
+        try { await persistentCache.clearCache(); } catch {
+          /* ignore */
+        }
+        stats = await fetchLeetCodeStats(username, showGraph, showRecent);
+        await persistentCache.setCache(cacheKey, stats, LEETCODE_CACHE_TTL);
+      }
     } else {
       stats = await fetchLeetCodeStats(username, showGraph, showRecent);
       await persistentCache.setCache(cacheKey, stats, LEETCODE_CACHE_TTL);
