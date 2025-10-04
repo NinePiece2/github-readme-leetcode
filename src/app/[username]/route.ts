@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { CardOptions, LeetCodeStats } from '../../types/leetcode';
+import { CardOptions, LeetCodeStats, AcSubmissionNum } from '../../types/leetcode';
 import { getTheme } from '../../config/themes';
 import { fetchLeetCodeStats, fetchUserStats } from '../../lib/leetcode-api';
 import { generateLeetCodeCard } from '../../lib/svg-generators';
@@ -48,10 +48,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ user
         const liteResp = await fetchUserStats(username).catch(() => null);
         const matchedUser = liteResp?.data?.matchedUser;
         if (matchedUser) {
-          const ac = matchedUser.submitStatsGlobal?.acSubmissionNum || [];
-          const easyLive = ac.find((d: any) => d.difficulty === 'Easy')?.count || 0;
-          const mediumLive = ac.find((d: any) => d.difficulty === 'Medium')?.count || 0;
-          const hardLive = ac.find((d: any) => d.difficulty === 'Hard')?.count || 0;
+          const ac: AcSubmissionNum[] = matchedUser.submitStatsGlobal?.acSubmissionNum || [];
+          const easyLive = ac.find((d: AcSubmissionNum) => d.difficulty === 'Easy')?.count || 0;
+          const mediumLive = ac.find((d: AcSubmissionNum) => d.difficulty === 'Medium')?.count || 0;
+          const hardLive = ac.find((d: AcSubmissionNum) => d.difficulty === 'Hard')?.count || 0;
           const rankLive = matchedUser.profile?.ranking || 0;
           const totalLive = easyLive + mediumLive + hardLive;
 
