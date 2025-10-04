@@ -59,7 +59,7 @@ SVG cards for your GitHub README showing off your LeetCode progress. Inspired by
 Just add this to your README:
 
 ```markdown
-![LeetCode Stats](https://cloudflare_URL/your-username)
+![LeetCode Stats](https://github-readme-leetcode-card.romitsagu.com/your-username)
 ```
 
 ## Features
