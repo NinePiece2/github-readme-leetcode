@@ -19,7 +19,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
-    "@opennextjs/cloudflare": "^1.11.1",
+    "@opennextjs/cloudflare": "^1.12.0",
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
@@ -34,6 +34,6 @@
     "eslint-config-next": "16.0.1",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "wrangler": "^4.46.0"
+    "wrangler": "^4.47.0"
   }
 }
