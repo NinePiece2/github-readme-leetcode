@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.13.1",
-    "next": "16.0.3",
+    "next": "16.0.4",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
@@ -31,9 +31,9 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.0.3",
+    "eslint-config-next": "16.0.4",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "wrangler": "^4.49.0"
+    "wrangler": "^4.50.0"
   }
 }
