@@ -10,7 +10,7 @@
   },
   "homepage": "https://github.com/NinePiece2/github-readme-leetocde",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
