@@ -77,15 +77,21 @@ Just add this to your README:
 ![LeetCode](https:/github-readme-leetcode-card.romitsagu.com/NinePiece2)
 ```
 
+![LeetCode](https:/github-readme-leetcode-card.romitsagu.com/NinePiece2)
+
 **Dark theme:**
 ```markdown
 ![LeetCode](https://github-readme-leetcode-card.romitsagu.com/NinePiece2?theme=dark)
 ```
 
+![LeetCode](https://github-readme-leetcode-card.romitsagu.com/NinePiece2?theme=dark)
+
 **With extras:**
 ```markdown
 ![LeetCode](https://github-readme-leetcode-card.romitsagu.com/NinePiece2?theme=tokyonight&show=graph,recent)
 ```
+
+![LeetCode](https://github-readme-leetcode-card.romitsagu.com/NinePiece2?theme=tokyonight&show=graph,recent)
 
 ## Options
 
