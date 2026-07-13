@@ -33,7 +33,7 @@
     "eslint": "^10",
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
-    "typescript": "^6",
-    "wrangler": "^4.108.0"
+    "typescript": "^7",
+    "wrangler": "^4.110.0"
   }
 }
