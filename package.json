@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.20.2",
-    "next": "16.2.12",
+    "next": "16.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
@@ -31,10 +31,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^10",
-    "eslint-config-next": "16.2.12",
+    "eslint-config-next": "16.3.0",
     "tailwindcss": "^4",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "wrangler": "^4.118.0"
+    "wrangler": "^4.120.0"
   }
 }
